@@ -36,11 +36,56 @@
             background-color: var(--light-bg);
             color: var(--light-text);
             padding-bottom: 50px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Decorative corner images */
+        .corner-image {
+            position: fixed;
+            z-index: -1;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .top-left {
+            top: 20px;
+            left: 0;
+            width: 200px;
+            height: 200px;
+            background: url('assets/topleft.png') no-repeat top left;
+            background-size: contain;
+        }
+        
+        .bottom-right {
+            bottom: 0;
+            right: 0;
+            width: 250px;
+            height: 250px;
+            background: url('assets/bottomright.png') no-repeat bottom right;
+            background-size: contain;
+        }
+        
+        /* Subtle texture for body */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -2;
         }
         
         body.dark-theme {
             background-color: var(--dark-bg);
             color: var(--dark-text);
+        }
+        
+        .dark-theme::before {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23FFFFFF' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
         
         .container {
@@ -136,7 +181,7 @@
         /* Cover Section */
         .cover {
             height: 550px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/soloman.png');
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/soloman2.png');
             background-size: cover;
             background-position: center;
             border-radius: 0 0 10px 10px;
@@ -159,41 +204,67 @@
         }
         
         .cover h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
+            font-size: 42px;
+            margin-bottom: 15px;
             color: var(--lemon);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .cover h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--lemon);
+            border-radius: 2px;
         }
         
         .cover p {
-            font-size: 18px;
+            font-size: 22px;
             max-width: 600px;
+            margin-top: 25px;
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 2px solid var(--goldenrod);
         }
         
         /* Profile Card */
         .profile-card {
             background: var(--light-card);
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
             padding: 20px;
-            margin-top: -120px;
+            margin-top: -160px;
             position: relative;
             z-index: 10;
             text-align: center;
             border: 2px solid var(--goldenrod);
+            /* Subtle texture for profile card */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23E87715' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         
         .dark-theme .profile-card {
             background: var(--dark-card);
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFB31A' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         
         .profile-img {
-            width: 150px;
-            height: 150px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             border: 5px solid var(--light-card);
-            box-shadow: 0 0 15px var(--marigold);
-            margin: 0 auto 15px;
+            box-shadow: 0 0 20px var(--marigold);
+            margin: -130px auto 15px;
             overflow: hidden;
             background: url('assets/maveliprof.png') center/cover;
             display: flex;
@@ -201,6 +272,8 @@
             justify-content: center;
             font-size: 60px;
             color: var(--russet);
+            position: relative;
+            z-index: 20;
         }
         
         .dark-theme .profile-img {
@@ -210,6 +283,7 @@
         .profile-card h2 {
             color: var(--russet);
             margin-bottom: 5px;
+            font-size: 28px;
         }
         
         .dark-theme .profile-card h2 {
@@ -604,6 +678,24 @@
                 gap: 10px;
                 align-items: flex-start;
             }
+            
+            .cover h1 {
+                font-size: 28px;
+            }
+            
+            .cover p {
+                font-size: 16px;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+                margin-top: -100px;
+            }
+            
+            .corner-image {
+                display: none;
+            }
         }
         
         /* Two-column layout for better space usage */
@@ -628,13 +720,17 @@
     </style>
 </head>
 <body>
+    <!-- Decorative corner images -->
+    <div class="corner-image top-left"></div>
+    <div class="corner-image bottom-right"></div>
+
     <!-- Header & Navigation -->
     <header>
         <div class="container">
             <nav>
                 <div class="logo">
                     <i class="fas fa-crown"></i>
-                    <span>👑 Maveli's LinkedIn</span>
+                    <span>Mahabali Thampuraan</span>
                 </div>
                 <div class="nav-right">
                     <ul class="nav-links">
@@ -653,8 +749,7 @@
         <!-- Cover Section -->
         <div class="cover">
             <div class="cover-content">
-                <h1>Welcome to Maveli's Professional Network</h1>
-                <p>Connecting Kerala's finest since the Golden Era</p>
+                
             </div>
         </div>
 
@@ -682,18 +777,20 @@
     </p>
     <p>
         Back in the day, I was running the best startup called Prosperity Pvt. Ltd. — no EMI, no unemployment, 
-        no WhatsApp forwards, everyone equal. Basically, Kerala was a heaven on earth.
+        no WhatsApp forwards, everyone equal, a heaven on earth. 
+        <br>Basically, The Southern India . ആന്നെ, പരശുരാമൻ കോടാലീംകൊണ്ട് വന്നിട്ടില്ലാരുന്നു.
     </p>
     <p>
         But what happens? Enter Lord Vishnu in his ‘Pocket Brahmin Boy Edition’ avatar – Vamana. Cute little guy 
         comes asking for three steps of land. I’m thinking, ‘Sweet fellow, probably building a small hut. Why not?’ 
-        Next thing I know, dude turns into Skyscraper 2.0 and boom—covers earth, sky, and space in two steps. 
-        For the third, I had no real estate left, so I just gave him my head. Talk about a bad property deal!
+        Next thing I know, dude turns into Skyscraper 2.0 and boom—covers earth, sky, and space in two steps. <br>
+        When he asked for the third , i said " <b>aah എൻ്റെ തലേലോട്ട് എടുത്ത് വെക്ക്</b>
+ ", next you know. Talk about a bad property deal!
     </p>
     <p>
-        And oh, here’s the real controversy – once upon a time I was a muscular, fit demon king with triceps 
+        And oh, here’s the real controversy – I was a muscular, fit demon king with triceps 
         sharper than Vallam Kali oars. But the devas, jealous as usual, decided to rebrand me as some 
-        ‘funny diabetic uncle’ with a big belly and umbrella. Imagine that! From six-pack to rice-sack – 
+        ‘funny diabetic uncle’ with a big belly and umbrella. Imagine that! From <b>six-pack</b> to <b>rice-sack</b> – 
         all thanks to divine PR sabotage.
     </p>
     <p>
@@ -722,6 +819,31 @@
                 </div>
             </div>
 
+            <!-- Publications Section -->
+<div class="section publications">
+    <h3>Publications</h3>
+    <div class="experience-item">
+        <div class="exp-title">100 Steps to Land Surveying, Vol. 1</div>
+        <div class="exp-company">Golden Era Press</div>
+        <div class="exp-date">Released: Timeless</div>
+        <div class="exp-desc">
+            - Comprehensive guide on conquering kingdoms, one perfectly measured step at a time.<br>
+            - Includes bonus chapter: "How to impress jealous gods without starting a war."<br>
+            - Reviews: "Life-changing, I now measure my apartment before buying it." – Anonymous Mortal
+        </div>
+    </div>
+    <div class="experience-item">
+        <div class="exp-title">103 Steps to Land Surveying, Vol. 2</div>
+        <div class="exp-company">Patala Press (Now with extra steps!)</div>
+        <div class="exp-date">Released: After minor divine intervention</div>
+        <div class="exp-desc">
+            - Adds 3 “extremely valuable” steps learned from real-life boss-level situations.<br>
+            - Chapter highlight: "How to gracefully surrender your head when your property deal goes wrong."<br>
+            - Reviews: "I came for land tips, stayed for the existential crisis. 10/10 would recommend." – Confused Asura
+        </div>
+    </div>
+</div>
+
 
                 <!-- Experience Section -->
                 <div class="section experience">
@@ -732,8 +854,8 @@
     <div class="exp-date">Golden Era – Present (Seasonal Contract)</div>
     <div class="exp-desc">
         - Successfully ran the only kingdom in history with 100% approval rating (even my enemies wanted citizenship)<br>
-        - Rolled out the iconic “No GST on banana chips” scheme – voters still thank me during tea breaks<br>
-        - Introduced world’s first free healthcare, education & unlimited payasam subscription<br>
+        - Rolled out the iconic "No GST on banana chips" scheme – voters still thank me during tea breaks<br>
+        - Introduced world's first free healthcare, education & unlimited payasam subscription<br>
         - Downsized by a 3-foot intern named Vamana (HR still investigating)<br>
         - Currently operating from Patala branch office (remote work without WiFi – cruelest punishment ever)<br>
         - Awaiting divine severance package, includes one free Onam pass per year
@@ -745,7 +867,7 @@
     <div class="exp-company">Onam Festival Inc. (Seasonal Startup)</div>
     <div class="exp-date">Annual Contract (Lifetime Renewal)</div>
     <div class="exp-desc">
-        - Coordinated the world’s largest catering service without Swiggy, Zomato, or even WhatsApp groups<br>
+        - Coordinated the world's largest catering service without Swiggy, Zomato, or even WhatsApp groups<br>
         - Supervised 64+ dishes on a single banana leaf (still waiting for Michelin to call)<br>
         - Standardized banana leaf orientation at scale – ISO certified left-to-right placement<br>
         - Maintained pappadam crispiness under extreme humidity (recognized as Nobel-worthy achievement)<br>
@@ -793,7 +915,7 @@
                         <div class="post">
                             <div class="post-img" style="background-image: url('assets/pookalam.png');">Pookalam Problems</div>
                             <div class="post-content">
-                                <p class="post-text">Neighbors used store-bought flowers for their pookalam. Store. Bought. Flowers. I'm not angry, just disappointed. Where's the dedication? The early morning flower-picking struggles? The authenticity? #PookalamPolice</p>
+                                <p class="post-text">Neighbors used store-bought flowers for their pookalam. Store. Bought. Flowers. <br>Ooh Lajjavaham...<br> I'm not angry, I'm not. Where's the dedication? The early morning flower-picking struggles? The authenticity? #PookalamPolice</p>
                                 <div class="post-reactions">
                                     <span>👍 63K 😢 28K</span>
                                     <span>💬 9.8K</span>
@@ -971,12 +1093,12 @@
     <script>
         // Function for Connect button
         function connect() {
-            alert("Maveli has been notified of your connection request! He'll respond after his afternoon nap and banana chips tasting. (Ithrem kaaryangal und, patience venam!)");
+            alert("Maveli has been notified of your connection request! He'll resposnd soon as possible after BSNL has a branch in pathalam!");
         }
         
         // Function for Message button
         function message() {
-            alert("Messaging feature temporarily unavailable. Maveli is currently busy judging pookalam competitions and taste-testing payasam. Try again after Onam!");
+            alert("Maveli Offine. Maveli is blackout drunk on Paalada no.37 ,ഒരു കരിക്ക് വെട്ടി കൊണ്ടുവരണ്ടതാണ്");
         }
         
         // Theme toggle functionality
