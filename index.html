@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👑 Maveli's LinkedIn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        :root {
+            --russet: #6A2615;
+            --fiery: #C83D11;
+            --marigold: #E87715;
+            --goldenrod: #FFB31A;
+            --lemon: #FFDD33;
+            --olive-yellow: #B3B134;
+            --olive-green: #688339;
+            --light-bg: #f9f7f2;
+            --light-card: #ffffff;
+            --light-text: #333333;
+            --light-muted: #666666;
+            --dark-bg: #1a1a1a;
+            --dark-card: #2d2d2d;
+            --dark-text: #f0f0f0;
+            --dark-muted: #bbbbbb;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--light-text);
+            padding-bottom: 50px;
+        }
+        
+        body.dark-theme {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(to right, var(--russet), var(--fiery));
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--lemon);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 3px;
+        }
+        
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--lemon);
+            transition: transform 0.3s;
+        }
+        
+        .dark-theme .theme-toggle::before {
+            transform: translateX(26px);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Cover Section */
+        .cover {
+            height: 550px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/soloman.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 0 0 10px 10px;
+            position: relative;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            padding: 0 20px;
+        }
+        
+        .cover h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--lemon);
+        }
+        
+        .cover p {
+            font-size: 18px;
+            max-width: 600px;
+        }
+        
+        /* Profile Card */
+        .profile-card {
+            background: var(--light-card);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: -120px;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            border: 2px solid var(--goldenrod);
+        }
+        
+        .dark-theme .profile-card {
+            background: var(--dark-card);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--light-card);
+            box-shadow: 0 0 15px var(--marigold);
+            margin: 0 auto 15px;
+            overflow: hidden;
+            background: url('assets/maveliprof.png') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--russet);
+        }
+        
+        .dark-theme .profile-img {
+            border-color: var(--dark-card);
+        }
+        
+        .profile-card h2 {
+            color: var(--russet);
+            margin-bottom: 5px;
+        }
+        
+        .dark-theme .profile-card h2 {
+            color: var(--lemon);
+        }
+        
+        .profile-card .headline {
+            color: var(--fiery);
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .dark-theme .profile-card .headline {
+            color: var(--goldenrod);
+        }
+        
+        .profile-card .location {
+            color: var(--olive-green);
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .dark-theme .profile-card .location {
+            color: var(--olive-yellow);
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--fiery);
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--fiery);
+            border: 2px solid var(--fiery);
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Sections */
+        .section {
+            background: var(--light-card);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--olive-green);
+        }
+        
+        .dark-theme .section {
+            background: var(--dark-card);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            border-left: 4px solid var(--olive-yellow);
+        }
+        
+        .section h3 {
+            color: var(--russet);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--goldenrod);
+        }
+        
+        .dark-theme .section h3 {
+            color: var(--lemon);
+            border-bottom: 2px solid var(--marigold);
+        }
+        
+        .about p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* Experience */
+        .experience-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dark-theme .experience-item {
+            border-bottom: 1px solid #444;
+        }
+        
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+        
+        .exp-title {
+            font-weight: bold;
+            color: var(--fiery);
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+        
+        .dark-theme .exp-title {
+            color: var(--goldenrod);
+        }
+        
+        .exp-company {
+            color: var(--olive-green);
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .dark-theme .exp-company {
+            color: var(--olive-yellow);
+        }
+        
+        .exp-date {
+            color: var(--marigold);
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .exp-desc {
+            color: var(--light-text);
+            line-height: 1.5;
+        }
+        
+        .dark-theme .exp-desc {
+            color: var(--dark-text);
+        }
+        
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill {
+            background: linear-gradient(to right, var(--lemon), var(--goldenrod));
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            color: var(--russet);
+            font-weight: 500;
+        }
+        
+        .dark-theme .skill {
+            background: linear-gradient(to right, var(--olive-yellow), var(--olive-green));
+            color: white;
+        }
+        
+        .skill i {
+            margin-right: 5px;
+            color: var(--russet);
+        }
+        
+        .dark-theme .skill i {
+            color: white;
+        }
+        
+        /* Recommendations */
+        .recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .recommendation {
+            background: #fef8e6;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--goldenrod);
+        }
+        
+        .dark-theme .recommendation {
+            background: #3d3d3d;
+            border-left: 4px solid var(--marigold);
+        }
+        
+        .recommendation p {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: var(--russet);
+        }
+        
+        .dark-theme .recommendation p {
+            color: var(--light-text);
+        }
+        
+        .recommendation .author {
+            color: var(--olive-green);
+            text-align: right;
+            font-weight: bold;
+            font-style: normal;
+        }
+        
+        .dark-theme .recommendation .author {
+            color: var(--olive-yellow);
+        }
+        
+        /* Activity */
+        .activity-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dark-theme .activity-item {
+            border-bottom: 1px solid #444;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--goldenrod);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--russet);
+        }
+        
+        .dark-theme .activity-icon {
+            background: var(--marigold);
+            color: white;
+        }
+        
+        /* Posts */
+        .posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .post {
+            background: #fef8e6;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border: 1px solid var(--goldenrod);
+        }
+        
+        .dark-theme .post {
+            background: #3d3d3d;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            border: 1px solid var(--marigold);
+        }
+        
+        .post-img {
+            height: 150px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        
+        .post-content {
+            padding: 15px;
+        }
+        
+        .post-text {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: var(--russet);
+        }
+        
+        .dark-theme .post-text {
+            color: var(--dark-text);
+        }
+        
+        .post-reactions {
+            display: flex;
+            justify-content: space-between;
+            color: var(--olive-green);
+            font-size: 14px;
+        }
+        
+        .dark-theme .post-reactions {
+            color: var(--olive-yellow);
+        }
+        
+        /* Services Section */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .service {
+            background: linear-gradient(to bottom, #fff8e1, #ffecb3);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--goldenrod);
+        }
+        
+        .dark-theme .service {
+            background: linear-gradient(to bottom, #3d3c2a, #5d5c47);
+            border: 1px solid var(--marigold);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: var(--russet);
+            margin-bottom: 15px;
+        }
+        
+        .dark-theme .service-icon {
+            color: var(--lemon);
+        }
+        
+        .service h4 {
+            color: var(--russet);
+            margin-bottom: 10px;
+        }
+        
+        .dark-theme .service h4 {
+            color: var(--lemon);
+        }
+        
+        .service p {
+            color: var(--olive-green);
+            line-height: 1.5;
+        }
+        
+        .dark-theme .service p {
+            color: var(--olive-yellow);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--olive-green);
+            padding: 20px;
+            border-top: 2px solid var(--goldenrod);
+        }
+        
+        .dark-theme footer {
+            color: var(--olive-yellow);
+            border-top: 2px solid var(--marigold);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .cover {
+                height: 200px;
+            }
+            
+            .posts, .services, .recommendations {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-right {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+        
+        /* Two-column layout for better space usage */
+        .main-content {
+            display: grid;
+            grid-template-columns: 7fr 5fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-crown"></i>
+                    <span>👑 Maveli's LinkedIn</span>
+                </div>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Profile</a></li>
+                        <li><a href="mundu.html">Mundu Rater</a></li>
+                        <li><a href="sadya.html">Sadya Rater</a></li>
+                        <li><a href="translator.html">Translator</a></li>
+                    </ul>
+                    <button class="theme-toggle" aria-label="Toggle dark mode" onclick="toggleTheme()"></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Cover Section -->
+        <div class="cover">
+            <div class="cover-content">
+                <h1>Welcome to Maveli's Professional Network</h1>
+                <p>Connecting Kerala's finest since the Golden Era</p>
+            </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="profile-card">
+            <div class="profile-img"></div>
+            <h2>Mahabali Maveli</h2>
+            <div class="headline">Former King of Kerala | Real Estate Agent | SaaS Provider</div>
+            <div class="location">Kerala, India · 33M followers</div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="connect()">Connect</button>
+                <button class="btn btn-outline" onclick="message()">Message</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="left-column">
+                <!-- About Section -->
+                <!-- About Section -->
+<div class="section about">
+    <h3>About</h3>
+    <p>
+        "Hi, I’m Mahabali – yes, the Maveli. Not your neighborhood uncle who eats two extra payasams at Onam Sadya, 
+        but the original Asura king, grandson of Prahlada, and full-time landlord of Patala Lok.
+    </p>
+    <p>
+        Back in the day, I was running the best startup called Prosperity Pvt. Ltd. — no EMI, no unemployment, 
+        no WhatsApp forwards, everyone equal. Basically, Kerala was a heaven on earth.
+    </p>
+    <p>
+        But what happens? Enter Lord Vishnu in his ‘Pocket Brahmin Boy Edition’ avatar – Vamana. Cute little guy 
+        comes asking for three steps of land. I’m thinking, ‘Sweet fellow, probably building a small hut. Why not?’ 
+        Next thing I know, dude turns into Skyscraper 2.0 and boom—covers earth, sky, and space in two steps. 
+        For the third, I had no real estate left, so I just gave him my head. Talk about a bad property deal!
+    </p>
+    <p>
+        And oh, here’s the real controversy – once upon a time I was a muscular, fit demon king with triceps 
+        sharper than Vallam Kali oars. But the devas, jealous as usual, decided to rebrand me as some 
+        ‘funny diabetic uncle’ with a big belly and umbrella. Imagine that! From six-pack to rice-sack – 
+        all thanks to divine PR sabotage.
+    </p>
+    <p>
+        Now here I am, chilling in Patala, occasionally visiting Kerala once a year for Onam. People still love 
+        me so much they make 64 curries in my name, decorate the ground with flowers, and dance wearing tiger 
+        paint on their bellies. Meanwhile, I can’t even get WiFi down here.
+    </p>
+    <p>
+        So yeah, that’s me – Maveli. Just and generous king, full-time underworld ruler, part-time Onam 
+        brand ambassador. 👑🍲🚤🌸
+    </p>
+</div>
+
+
+                <!-- Education Section -->
+            <div class="section education">
+                <h3>Education</h3>
+                <div class="experience-item">
+                    <div class="exp-title">Bachelor of Civil Engineering</div>
+                    <div class="exp-company">Nalanda University (Golden Era Batch)</div>
+                    <div class="exp-date">Graduated: Timeless</div>
+                    <div class="exp-desc">
+                        - Specialized in land surveying<br>
+                        - Final year project: "Underground Building Construction".
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- Experience Section -->
+                <div class="section experience">
+                    <h3>Experience</h3>
+                    <div class="experience-item">
+    <div class="exp-title">CEO & Eternal King</div>
+    <div class="exp-company">Kerala Kingdom Pvt. Ltd.</div>
+    <div class="exp-date">Golden Era – Present (Seasonal Contract)</div>
+    <div class="exp-desc">
+        - Successfully ran the only kingdom in history with 100% approval rating (even my enemies wanted citizenship)<br>
+        - Rolled out the iconic “No GST on banana chips” scheme – voters still thank me during tea breaks<br>
+        - Introduced world’s first free healthcare, education & unlimited payasam subscription<br>
+        - Downsized by a 3-foot intern named Vamana (HR still investigating)<br>
+        - Currently operating from Patala branch office (remote work without WiFi – cruelest punishment ever)<br>
+        - Awaiting divine severance package, includes one free Onam pass per year
+    </div>
+</div>
+
+                    <div class="experience-item">
+    <div class="exp-title">Freelance Sadya Organizer</div>
+    <div class="exp-company">Onam Festival Inc. (Seasonal Startup)</div>
+    <div class="exp-date">Annual Contract (Lifetime Renewal)</div>
+    <div class="exp-desc">
+        - Coordinated the world’s largest catering service without Swiggy, Zomato, or even WhatsApp groups<br>
+        - Supervised 64+ dishes on a single banana leaf (still waiting for Michelin to call)<br>
+        - Standardized banana leaf orientation at scale – ISO certified left-to-right placement<br>
+        - Maintained pappadam crispiness under extreme humidity (recognized as Nobel-worthy achievement)<br>
+        - Crisis management: handled curry shortages and sambhar vs rasam debates with zero casualties<br>
+        - Only employee in history paid annually with floral carpets and boat races
+    </div>
+</div>
+
+                </div>
+
+                <!-- Posts -->
+                <div class="section">
+                    <h3>Posts</h3>
+                    <div class="posts">
+                        <div class="post">
+                            <div class="post-img" style="background-image: url('assets/valpari.png');">Vaal Pari Game</div>
+                            <div class="post-content">
+                                <p class="post-text">Attended the annual Vaal Pari championship. My mundu slipped during the final round. Still won though! #GraceUnderPressure #MunduMatters</p>
+                                <div class="post-reactions">
+                                    <span>👍 42K 😂 37K</span>
+                                    <span>💬 5.2K</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <div class="post-img" style="background-image: url('assets/velcro.jpg');">Velcro Mundu</div>
+                            <div class="post-content">
+                                <p class="post-text">Tried a Velcro Mundu for convenience. Big mistake. The "crrrppp" sound during the solemn Onam prayer was... noticeable. Stick to traditional tying methods, folks! #OnamFails</p>
+                                <div class="post-reactions">
+                                    <span>👍 58K 😂 72K</span>
+                                    <span>💬 8.7K</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <div class="post-img" style="background-image: url('assets/banana.png');">Banana Chip Crisis</div>
+                            <div class="post-content">
+                                <p class="post-text">Emergency meeting with banana chip suppliers. The thickness variance this year is unacceptable! Some chips are so thin you can see through them, others could double as hockey pucks. We need consistency, people! #ChipGate2025</p>
+                                <div class="post-reactions">
+                                    <span>👍 87K 😱 42K</span>
+                                    <span>💬 12.4K</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <div class="post-img" style="background-image: url('assets/pookalam.png');">Pookalam Problems</div>
+                            <div class="post-content">
+                                <p class="post-text">Neighbors used store-bought flowers for their pookalam. Store. Bought. Flowers. I'm not angry, just disappointed. Where's the dedication? The early morning flower-picking struggles? The authenticity? #PookalamPolice</p>
+                                <div class="post-reactions">
+                                    <span>👍 63K 😢 28K</span>
+                                    <span>💬 9.8K</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <div class="post-img" style="background-image: url('assets/payasam.png');">Payasam Protocol</div>
+                            <div class="post-content">
+                                <p class="post-text">Important PSA: The payasam goes on the RIGHT side of the banana leaf. Not the left. Not the center. The RIGHT side. I've seen some chaotic leaf arrangements this year that would make my grandmother's spirit weep. #SadyaEtiquette</p>
+                                <div class="post-reactions">
+                                    <span>👍 95K 🙏 51K</span>
+                                    <span>💬 15.2K</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post">
+                            <div class="post-img" style="background-image: url('assets/mundu.png');">Mundu Folding Workshop</div>
+                            <div class="post-content">
+                                <p class="post-text">Hosting a free mundu-folding workshop this weekend. Too many people are showing up with what looks like they wrestled their clothing into submission. A well-folded mundu is a sign of respect! #MunduMasterclass</p>
+                                <div class="post-reactions">
+                                    <span>👍 71K 🙌 39K</span>
+                                    <span>💬 8.3K</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <!-- Services Section -->
+                <div class="section">
+                    <h3>Services</h3>
+                    <div class="services">
+                        <div class="service">
+                            <div class="service-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h4>Sadya as a Service (SaaS)</h4>
+                            <p>Premium Onam sadya delivered to your doorstep with 47 authentic items. Comes with complimentary banana chips and unlimited payasam. No UPI? No problem! You got no sadhya.</p>
+                        </div>
+                        <div class="service">
+                            <div class="service-icon">
+                                <i class="fas fa-chess-king"></i>
+                            </div>
+                            <h4>Kingdom Management Consulting</h4>
+                            <p>Expert advice on creating prosperous, equitable kingdoms. 100% <br>" satisfaction guarantee " (unless interrupted by some shawties or little guys). My rule was so good even the gods got jealous!</p>
+                        </div>
+                        <div class="service">
+                            <div class="service-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <h4>Mundu Draping Consultant</h4>
+                            <p>Professional mundu draping services for all occasions. Avoid embarrassing wardrobe malfunctions during important ceremonies. 
+                              <br>I've seen things...Unforgettable things... and I'm here to help!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="section skills">
+                    <h3>Skills & Endorsements</h3>
+                    <div class="skills-container">
+                        <div class="skill">
+                            <i class="fas fa-banana"></i> Banana Chips Logistics (endorsed by 33M Malayalis)
+                        </div>
+                        <div class="skill">
+                            <i class="fas fa-ruler-combined"></i> Land Measuring
+                        </div>
+                        <div class="skill">
+                            <i class="fas fa-ship"></i> Vallamkali Team Management (endorsed by Boatmen Union)
+                        </div>
+                        <div class="skill">
+                            <i class="fas fa-utensil-spoon"></i> Payasam Quality Assurance (endorsed by grandmas)
+                        </div>
+                        <div class="skill">
+                            <i class="fas fa-people-arrows"></i> Equality Enforcement
+                        </div>
+                        <div class="skill">
+                            <i class="fas fa-leaf"></i> Pookalam Design Consultation
+                        </div>
+                        <div class="skill">
+                            <i class="fas fa-gamepad"></i> Traditional Games Management
+                        </div>
+                        <div class="skill">
+                            <i class="fas fa-tshirt"></i> Mundu Crisis Management
+                        </div>
+                        <div class="skill">
+                            <i class="fas fa-crown"></i> Royal Decree Issuance
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="section">
+                    <h3>Recommendations</h3>
+                    <div class="recommendations">
+                        <div class="recommendation">
+                            <p>"Best boss ever. Never charged GST on banana chips. His kingdom had better healthcare and education than most modern countries. Also, his sadya game is strong!"</p>
+                            <div class="author">- Anonymous Asura</div>
+                        </div>
+                        <div class="recommendation">
+                            <p>"Excellent Real Estate agent ... #borewell_expert"</p>
+                            <div class="author">- Avatar Union</div>
+                        </div>
+                        <div class="recommendation">
+                            <p>"Made Onam timeless. Legend. His annual inspections keep our culinary traditions alive. Also, he once liked my pulissery on Instagram. Pinne ente ammede parippuvada series-il comment cheythu!"</p>
+                            <div class="author">- Kerala Grandma</div>
+                        </div>
+                        
+                        <div class="recommendation">
+                            <p>"His mundu-tying skills are next level. I've seen him tie a perfect mundu during a cyclone. Respect! #MunduGoals"</p>
+                            <div class="author">- Traditional Weaver</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity -->
+                <div class="section">
+                    <h3>Activity</h3>
+                    <div class="activity-item">
+                        <div class="activity-content">
+                            <div class="activity-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div>
+                                <p>📢 Just landed in Kerala for Onam 2025 🌼 #OnamVibes #VallaSadya</p>
+                                <small>2 hours ago</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-content">
+                            <div class="activity-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div>
+                                <p>📢 Excited to try this year's Sadya 🍛 #BananaAlignmentMatters #PappadamCrisisAverted</p>
+                                <small>5 hours ago</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-content">
+                            <div class="activity-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div>
+                                <p>📢 Just endorsed 47K people for "Payasam Appreciation" skills 🍮 #SweetSkills</p>
+                                <small>Yesterday</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-content">
+                            <div class="activity-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div>
+                                <p>📢 Officially declaring war on uneven banana chips! 🍌⚔️ #ChipJustice</p>
+                                <small>2 days ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Onam Vibes © 2025 - A humorous tribute to King Mahabali and Onam festivities | Wishing you all a prosperous Onam! 🌼</p>
+    </footer>
+
+    <script>
+        // Function for Connect button
+        function connect() {
+            alert("Maveli has been notified of your connection request! He'll respond after his afternoon nap and banana chips tasting. (Ithrem kaaryangal und, patience venam!)");
+        }
+        
+        // Function for Message button
+        function message() {
+            alert("Messaging feature temporarily unavailable. Maveli is currently busy judging pookalam competitions and taste-testing payasam. Try again after Onam!");
+        }
+        
+        // Theme toggle functionality
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            // Save theme preference to localStorage
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('darkTheme', isDark);
+        }
+        
+        // Check for saved theme preference
+        function loadTheme() {
+            const darkTheme = localStorage.getItem('darkTheme') === 'true';
+            if (darkTheme) {
+                document.body.classList.add('dark-theme');
+            }
+        }
+        
+        // Add some dynamic effects
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            
+            const skills = document.querySelectorAll('.skill');
+            skills.forEach(skill => {
+                skill.addEventListener('mouseover', () => {
+                    skill.style.transform = 'scale(1.05)';
+                    skill.style.transition = 'transform 0.3s';
+                });
+                skill.addEventListener('mouseout', () => {
+                    skill.style.transform = 'scale(1)';
+                });
+            });
+            
+            const posts = document.querySelectorAll('.post');
+            posts.forEach(post => {
+                post.addEventListener('mouseover', () => {
+                    post.style.transform = 'translateY(-5px)';
+                    post.style.boxShadow = '0 8px 15px rgba(0,0,0,0.2)';
+                    post.style.transition = 'transform 0.3s, box-shadow 0.3s';
+                });
+                post.addEventListener('mouseout', () => {
+                    post.style.transform = 'translateY(0)';
+                    post.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+                });
+            });
+            
+            const services = document.querySelectorAll('.service');
+            services.forEach(service => {
+                service.addEventListener('mouseover', () => {
+                    service.style.transform = 'translateY(-5px)';
+                    service.style.transition = 'transform 0.3s';
+                });
+                service.addEventListener('mouseout', () => {
+                    service.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

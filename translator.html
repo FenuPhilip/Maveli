@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Onam Greetings Translator 🌼</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #fffde7;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background: #f57f17;
+      color: white;
+      padding: 20px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .container {
+      margin: 40px auto;
+      max-width: 600px;
+      background: #fff8e1;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 2px solid #f9a825;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      background: #43a047;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2e7d32;
+    }
+
+    #output {
+      margin-top: 30px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #4e342e;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <header>🌼 Onam Greetings Translator 🌼</header>
+  <div class="container">
+    <h2>Type your English Onam Greeting</h2>
+    <input type="text" id="greetingInput" placeholder="Eg: Happy Onam to you and family">
+    <br>
+    <button onclick="translateGreeting()">Translate →</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    // Greeting dictionary
+    const greetingsLibrary = {
+      // Vast Onam Greetings Library (50 English keys, 3 Malayalam translations each)
+
+  // 🎉 Formal / Traditional Onam Wishes
+  "happy onam": [
+    "ഓണം ആശംസകൾ!",
+    "എല്ലാവർക്കും സന്തോഷമുള്ള ഓണം ആശംസിക്കുന്നു 🌸",
+    "ഹാപ്പി ഓണം, പുത്തൻ തുടക്കങ്ങളോടെ ✨"
+  ],
+  "wishing you a prosperous onam": [
+    "സമൃദ്ധിയുള്ള ഓണം ആശംസിക്കുന്നു!",
+    "ധന്യമായ ഓണകാലം ആയിരിക്കട്ടെ 🌼",
+    "സൗഭാഗ്യവും സന്തോഷവും നിറഞ്ഞ ദിനങ്ങൾ വരട്ടെ 🙏"
+  ],
+  "may this onam bring joy and happiness": [
+    "ഈ ഓണം സന്തോഷവും സൗഭാഗ്യവും കൊണ്ടുവരട്ടെ 🎉",
+    "പുഞ്ചിരികൾ നിറഞ്ഞ ഓണം ആയിരിക്കട്ടെ 🌸",
+    "ആനന്ദത്തോടെ ഓണം ആഘോഷിക്കൂ ✨"
+  ],
+  "onam greetings to you and family": [
+    "നിനക്കും കുടുംബത്തിന്നും ഓണാശംസകൾ 🙏",
+    "കുടുംബം മുഴുവൻ സന്തോഷത്തോടെ ഓണം ആഘോഷിക്കട്ടെ 🌸",
+    "ഒരുമയും സ്നേഹവും നിറഞ്ഞ ഓണം ആശംസിക്കുന്നു ❤️"
+  ],
+  "celebrate onam with love and harmony": [
+    "സ്നേഹത്തോടും ഐക്യത്തോടും കൂടിയ ഓണം ആഘോഷിക്കൂ 🌸",
+    "ഒരുമിച്ചാണ് ഓണത്തിന്റെ സുഖം ✨",
+    "സൗഹൃദവും സന്തോഷവും നിറഞ്ഞ ഓണം വരട്ടെ 🎉"
+  ],
+  "have a colorful onam": [
+    "പൂക്കളങ്ങളോളം നിറമുള്ള ഓണം ആശംസിക്കുന്നു 🌼",
+    "ജീവിതം പൂര്ണ്ണം നിറഞ്ഞു പൊങ്കാലയോടെ 🌈",
+    "കലകളും നിറങ്ങളും നിറഞ്ഞ ഓണകാലം ആയിരിക്കട്ടെ 🎨"
+  ],
+  "may your life bloom like a pookalam": [
+    "നിന്റെ ജീവിതം പൂക്കളമായി വിരിയട്ടെ 🌸",
+    "പൂക്കളം പോലെ മനോഹരമായ ജീവിതം ആശംസിക്കുന്നു ✨",
+    "പൂക്കളുടെ നിറങ്ങളിൽ സന്തോഷം വരട്ടെ 🌼"
+  ],
+  "onam blessings to you": [
+    "നിനക്കായി ഓണാശംസകളും അനുഗ്രഹങ്ങളും 🙏",
+    "സന്തോഷം നിറഞ്ഞ അനുഗ്രഹീതമായ ഓണം ആശംസിക്കുന്നു 🌸",
+    "ഓണത്തിന്റെ കൃപ നിറഞ്ഞ ദിനങ്ങൾ വരട്ടെ ✨"
+  ],
+  "wishing you health and wealth this onam": [
+    "ആരോഗ്യവും ഐശ്വര്യവും നിറഞ്ഞ ഓണം ആശംസിക്കുന്നു 🙏",
+    "സൗഖ്യവും സമൃദ്ധിയും വരട്ടെ 🌼",
+    "ജീവിതം സമൃദ്ധിയായി വിരിയട്ടെ 🎉"
+  ],
+  "may this onam bring peace and prosperity": [
+    "ശാന്തിയും സമൃദ്ധിയും നിറഞ്ഞ ഓണം വരട്ടെ ✨",
+    "സൗഖ്യവും സമാധാനവും നിന്റെ ജീവിതത്തിൽ വിരിയട്ടെ 🌸",
+    "ഓണാശംസകൾ, സമാധാനപൂർണ്ണ ദിനങ്ങളോടെ 🙏"
+  ],
+
+  // 😂 Funny Wishes
+  "eat sadhya sleep repeat": [
+    "സദ്യ കഴിച്ച് ഉറങ്ങൂ, വീണ്ടും തുടങ്ങൂ 😴🍛",
+    "പപ്പടം → പായസം → ഉറക്കം → വീണ്ടും 🔄",
+    "ഇന്ന് ഒന്നും വേണ്ട, സദ്യ full tank മാത്രം 🚀"
+  ],
+  "payasam overdose incoming": [
+    "പായസം overdose warning 🚨",
+    "payasam തന്നെയാണ് Onam medicine 😍",
+    "Paal payasam injection ready 💉🍮"
+  ],
+  "onam vibes only": [
+    "ഓണം vibes മാത്രം machaa 🔥",
+    "ഇന്ന് vibe ആണ്, ഓണം vibe 🌸",
+    "Onam mode activated ✅"
+  ],
+  "maveli returns": [
+    "മാവേലി വന്നേ, insta story ready ആക്കൂ 📸",
+    "Maveli spotted at Lulu Mall 🤯",
+    "Breaking: മാവേലി back, mundu still tight 😎"
+  ],
+  "salary finished but onam strong": [
+    "പണം പോയാലും ഓണം strong 🔥",
+    "വില കൂടിയാലും vibe കുറയില്ല 🎉",
+    "pocket empty, heart full ❤️"
+  ],
+  "hostel sadhya special": [
+    "Hostel sadhya = 1 pappadam + 2 pickle 😂",
+    "പായസം കാണാൻ പോലും dream ticket വേണം 😅",
+    "Hostel Onam = Maggi with banana leaf 🍜🍌"
+  ],
+  "don’t lose your mundu this onam": [
+    "ഓണം ആഘോഷിക്കൂ, mundu tight 🔥",
+    "Mundu gone = respect gone 😅",
+    "Nokkedaa, loose aakanda 👀"
+  ],
+  "onam diet starts tomorrow": [
+    "ഇന്ന് full meals, diet tomorrow 😆",
+    "പായസം കഴിച്ച് gym Monday മുതൽ 💪",
+    "Onam cheat days unlimited 🍛"
+  ],
+  "full meals empty pockets": [
+    "സദ്യ full meals, pocket 0 balance 😭",
+    "Kuzhi adichalum paisa illa 😅",
+    "ഓണം feast = UPI declined 😂"
+  ],
+  "pookalam round stomach bigger": [
+    "പൂക്കളം round, stomach extra round 😆",
+    "Sadhya belly loading… 🍛",
+    "വലിയ പൂക്കളങ്ങൾ കാണണ്ട, വലിയ വയർ പോരെ 😅"
+  ],
+
+  // 👫 Family / Friends / Social
+  "onam with friends": [
+    "Friends കൂടെ ആയാൽ Onam level 🔥",
+    "Sadhya shared = happiness doubled 😍",
+    "Friendship + Onam = perfect combo ✨"
+  ],
+  "onam with family is priceless": [
+    "കുടുംബത്തോടൊപ്പം Onam = അമൂല്യം ❤️",
+    "Family vibes = Onam vibes 🌸",
+    "കൂടെ ചേർന്നാൽ മാത്രമേ Onam sweet ആകൂ 🎉"
+  ],
+  "let’s celebrate onam together": [
+    "ഒരുമിച്ച് Onam ആഘോഷിക്കാം 🌼",
+    "സംഗമത്തിന്റെയും സന്തോഷത്തിന്റെയും തിരുനാൾ 🎉",
+    "Togetherness is the spirit of Onam ❤️"
+  ],
+  "sending onam wishes across miles": [
+    "ദൂരം ഉണ്ടെങ്കിലും ഓണാശംസകൾ എത്തും 🌍",
+    "Across miles, Onam love never fades ✨",
+    "Online Onam hugs and greetings 🤗"
+  ],
+  "onam is about togetherness": [
+    "Onam = Togetherness 🌸",
+    "ഒരുമയും ഐക്യവും തന്നെയാണ് Onam 🎉",
+    "Vibe = unity, mood = Onam ✨"
+  ],
+  "reunited for onam celebrations": [
+    "Reunion vibes = Onam vibes ❤️",
+    "Family rejoined, Onam complete 🎉",
+    "Friends + Family = Festival mode 🔥"
+  ],
+  "enjoy onam with loved ones": [
+    "പ്രിയപ്പെട്ടവരോടൊപ്പം Onam ആഘോഷിക്കൂ 🌼",
+    "Love + Onam = double happiness ❤️",
+    "Loved ones make Onam beautiful ✨"
+  ],
+  "friends make onam special": [
+    "Friends ഇല്ലെങ്കിൽ Onam boring 😅",
+    "ഓണത്തിന്റെ real vibe = friendship 🔥",
+    "Best friends = best Onam vibes 🎉"
+  ],
+  "distance can’t stop onam love": [
+    "ദൂരം ഉള്ളാലും, Onam bonding strong ❤️",
+    "Miles can’t stop pookalam vibes 🌼",
+    "Digital Onam hugs 🤗✨"
+  ],
+  "this onam is better with you": [
+    "നിന്നോടൊപ്പം ആണെങ്കിൽ Onam complete 🌸",
+    "You + Me + Sadhya = 💯 vibes ❤️",
+    "Onam special, because you’re here ✨"
+  ],
+
+  // 🌸 Pookalam / Nature / Kerala Vibes
+  "may your pookalam be colorful": [
+    "നിന്റെ പൂക്കളം നിറങ്ങളിൽ വിരിയട്ടെ 🌼",
+    "Colorful vibes only 🌸",
+    "പൂക്കളങ്ങളോളം മനോഹരം ✨"
+  ],
+  "onam is in the air": [
+    "ഓണത്തിന്റെ മണം വായുവിൽ നിറഞ്ഞു 🌸",
+    "Vibe air-il undu machaa 🎉",
+    "Onam season officially activated ✅"
+  ],
+  "life should be like a pookalam": [
+    "ജീവിതം പൂക്കളം പോലെ നിറങ്ങളിൽ വിരിയട്ടെ 🌼",
+    "പൂക്കളങ്ങളുടെ സൗന്ദര്യം പോലെ മനോഹരം ✨",
+    "Smile = പൂക്കളം bloom 🌸"
+  ],
+  "flowers bring the onam spirit": [
+    "പൂക്കൾ തന്നെയാണ് Onam vibes 🌸",
+    "Flowers mood booster 🌼",
+    "പൂക്കളമില്ലാതെ Onam incomplete 😍"
+  ],
+  "onam without pookalam is incomplete": [
+    "പൂക്കളമില്ലെങ്കിൽ Onam ഇല്ല 🙅",
+    "No flowers = no vibes 😅",
+    "Pookalam = Onam passport ✅"
+  ],
+  "let your smile shine like pookalam": [
+    "പുഞ്ചിരി = പൂക്കളം brightness 🌸",
+    "Smile full bloom vibes 🌼",
+    "Onam smile, festival shine ✨"
+  ],
+  "nature blooms during onam": [
+    "Onam season = Nature festival 🌿",
+    "പച്ചയും പൂക്കളും full swing 🌼",
+    "Kerala turning paradise during Onam 🌸"
+  ],
+  "pookalam vibes everywhere": [
+    "Wherever you look = Pookalam 🌼",
+    "Flower circles everywhere 🌸",
+    "Onam = bloom festival 🎉"
+  ],
+  "kerala looks most beautiful in onam": [
+    "Onam season = Kerala shining 🌴",
+    "Kerala = God's own country full power ✨",
+    "Beauty + Onam = Kerala vibes 🌸"
+  ],
+  "pookalam = happiness": [
+    "പൂക്കളം = സന്തോഷം 🌸",
+    "Flowers = smile booster 🌼",
+    "Color circle = happy circle 🎉"
+  ],
+
+  // 🍛 Sadhya / Food Wishes
+  "may your banana leaf be always full": [
+    "നിന്റെ ഇലയ്ക്ക് എന്നും സദ്യ നിറഞ്ഞിരിക്കട്ടെ 🍛",
+    "Full meals on banana leaf vibes 🌿",
+    "Pothichoru level sadhya loading 😍"
+  ],
+  "onam means sadhya and love": [
+    "Onam = Sadhya + Love ❤️",
+    "Banana leaf + Curry + Love = Onam vibes 🌸",
+    "Sadhya shared is happiness doubled 🍛"
+  ],
+  "pappadam unlimited": [
+    "പപ്പടം unlimited supply 🍘🔥",
+    "No Onam without papadam crack sound 😍",
+    "Papadam = festival crunch vibe ✨"
+  ],
+  "parippu and ghee happiness": [
+    "Parippu + Ghee = heaven combo 😍",
+    "First course = ultimate bliss 🍛",
+    "ആദ്യത്തേത് തന്നെ jackpot ✨"
+  ],
+  "payasam is the real hero of onam": [
+    "പായസം = Onam hero 🍮",
+    "Payasam overdose vibes 😍",
+    "Without payasam, Onam incomplete ✨"
+  ],
+  "eat till you can’t move": [
+    "കഴിച്ച് കിടപ്പ് mode 😴🍛",
+    "Onam sadhya full tank vibes 🚀",
+    "Eat now, regret later 😂"
+  ],
+  "banana chips rain this onam": [
+    "Banana chips nonstop 🌧️🍌",
+    "Onam snack = endless chips 😍",
+    "Chips crunch sound festival 🔥"
+  ],
+  "no onam without sadhya": [
+    "സദ്യ ഇല്ലെങ്കിൽ Onam incomplete 🍛",
+    "No feast = no vibe 😅",
+    "Sadhya = Onam passport ✅"
+  ],
+  "onam feast forever": [
+    "ഓരോ ദിവസവും Onam feast vibes 🌸",
+    "Endless banana leaf dreams 🌿",
+    "Forever sadhya mode 😍"
+  ],
+  "sadhya is love payasam is life": [
+    "Sadhya is ❤️, Payasam is 💓",
+    "Food = festival = happiness 🍛🍮",
+    "Love + Life = Banana leaf vibes 🌿"
+  ]
+
+
+    };
+
+    function translateGreeting() {
+      const input = document.getElementById("greetingInput").value.trim().toLowerCase();
+      const output = document.getElementById("output");
+
+      if (input in greetingsLibrary) {
+        output.textContent = greetingsLibrary[input];
+      } else {
+        output.textContent = "🤷‍♂️ Ente puthra, that greeting not yet in our Onam library. Add it manually.";
+      }
+    }
+  </script>
+</body>
+</html>

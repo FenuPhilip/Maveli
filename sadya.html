@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sadhya Rater 🍛</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #fff8e1;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background: #f9a825;
+      padding: 20px;
+      font-size: 26px;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .step {
+      display: none;
+      padding: 30px;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .option {
+      background: #ffe082;
+      border: 2px solid #fbc02d;
+      padding: 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      width: 200px;
+      transition: transform 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    .option:hover {
+      background: #fff176;
+      transform: scale(1.05);
+    }
+
+    .tooltip {
+      display: none;
+      position: absolute;
+      bottom: -55px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      max-width: 200px;
+    }
+
+    .option:hover .tooltip {
+      display: block;
+    }
+
+    .next-btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background: #43a047;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .next-btn:hover {
+      background: #2e7d32;
+    }
+
+    #result {
+      font-size: 24px;
+      margin-top: 40px;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <header>🍌 Sadhya Rater 🍌</header>
+
+  <!-- Step 1: Pappadam -->
+  <div class="step active" id="step1">
+    <h2>Step 1: Pappadam Choice</h2>
+    <div class="options">
+      <div class="option" data-score="2">
+        1–2 Pappadams
+        <div class="tooltip">Respect. Balanced like a true mallu chakram rotation champion.</div>
+      </div>
+      <div class="option" data-score="-2">
+        5+ Pappadams
+        <div class="tooltip">Bro building Jio 5G tower with Pappadam antennas.</div>
+      </div>
+      <div class="option" data-score="1">
+        Broken Pappadam
+        <div class="tooltip">Still crunchy, just like Kerala politics.</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextStep(1)">Next →</button>
+  </div>
+
+  <!-- Step 2: Payasam -->
+  <div class="step" id="step2">
+    <h2>Step 2: Payasam</h2>
+    <div class="options">
+      <div class="option" data-score="3">
+        Parippu Payasam
+        <div class="tooltip">Certified Malayali blood test result = 100% Authentic ✅</div>
+      </div>
+      <div class="option" data-score="-3">
+        Payasam + Sambhar
+        <div class="tooltip">Sambhar + Payasam = CRIME BRANCH WILL CALL YOU SOON 🚨</div>
+      </div>
+      <div class="option" data-score="2">
+        3+ Payasams
+        <div class="tooltip">Hospital bill loading… but worth it, da.</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextStep(2)">Next →</button>
+  </div>
+
+  <!-- Step 3: Banana -->
+  <div class="step" id="step3">
+    <h2>Step 3: Banana</h2>
+    <div class="options">
+      <div class="option" data-score="2">
+        Eaten Last
+        <div class="tooltip">Traditional Malayali flex, respect 🙏</div>
+      </div>
+      <div class="option" data-score="-2">
+        Eaten First
+        <div class="tooltip">Genetic engineering gone wrong, NASA please check.</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextStep(3)">Next →</button>
+  </div>
+
+  <!-- Step 4: Rice -->
+  <div class="step" id="step4">
+    <h2>Step 4: Rice Quantity</h2>
+    <div class="options">
+      <div class="option" data-score="2">
+        Moderate Rice
+        <div class="tooltip">CM candidate material — proper portion control.</div>
+      </div>
+      <div class="option" data-score="-2">
+        Mountain of Rice
+        <div class="tooltip">Bro thinks he is hosting Asian Games Kabaddi team.</div>
+      </div>
+      <div class="option" data-score="-1">
+        Tiny Pinch
+        <div class="tooltip">Festival alla, this is fasting retreat?</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="nextStep(4)">Next →</button>
+  </div>
+
+  <!-- Step 5: Pickle -->
+  <div class="step" id="step5">
+    <h2>Step 5: Pickle</h2>
+    <div class="options">
+      <div class="option" data-score="1">
+        1–2 Pickles
+        <div class="tooltip">Respect. Enough tang, no stomach blasting.</div>
+      </div>
+      <div class="option" data-score="-2">
+        Full Plate Red
+        <div class="tooltip">Acid factory inside stomach officially inaugurated.</div>
+      </div>
+    </div>
+    <button class="next-btn" onclick="showResult()">Finish ✅</button>
+  </div>
+
+  <!-- Result -->
+  <div id="result"></div>
+
+  <script>
+    let score = 0;
+    let answers = {};
+
+    document.querySelectorAll(".option").forEach(option => {
+      option.addEventListener("click", () => {
+        // Reset border highlight
+        option.parentElement.querySelectorAll(".option").forEach(o => o.style.borderColor = "#fbc02d");
+        // Highlight chosen
+        option.style.borderColor = "#2e7d32";
+        // Save choice
+        option.parentElement.setAttribute("data-selected", option.getAttribute("data-score"));
+      });
+    });
+
+    function nextStep(stepNum) {
+      const step = document.getElementById("step" + stepNum);
+      const selected = step.querySelector(".options").getAttribute("data-selected");
+      if (selected) {
+        score += parseInt(selected);
+        answers["step" + stepNum] = parseInt(selected);
+        step.classList.remove("active");
+        document.getElementById("step" + (stepNum + 1)).classList.add("active");
+      } else {
+        alert("Select an option first!");
+      }
+    }
+
+    function showResult() {
+      const step = document.getElementById("step5");
+      const selected = step.querySelector(".options").getAttribute("data-selected");
+      if (selected) {
+        score += parseInt(selected);
+        answers["step5"] = parseInt(selected);
+        step.classList.remove("active");
+
+        let resultText = "";
+
+        // Special combo check
+        if (answers["step2"] === -3 && answers["step3"] === -2) {
+          resultText = "🚨 Cultural Criminal: You mixed Payasam with Sambhar AND ate banana first. Exile confirmed.";
+        } else if (answers["step4"] === -2 && answers["step1"] === -2) {
+          resultText = "🏔️ Rice Mountain Yodha: You caused a food shortage in Palakkad district, single-handedly.";
+        } else if (answers["step5"] === -2) {
+          resultText = "🌶️ Pickle Overlord: Your stomach is now a UN-registered chemical weapon.";
+        } else {
+          // Score-based general results
+          if (score >= 8) {
+            resultText = "👑 Sadya Chakravarthi: Full marks! Vallom! Kerala salutes you.";
+          } else if (score >= 4) {
+            resultText = "🌼 Proper Malayali Certified: Safe choices, no cultural crimes committed.";
+          } else if (score >= 1) {
+            resultText = "🤔 Tourist Mallu: Half Kerala, half Dubai. Plate confused like you.";
+          } else {
+            resultText = "🍕 Exile Candidate: Go eat pizza. Sadhya not for you, da.";
+          }
+        }
+
+        document.getElementById("result").innerText = resultText;
+      } else {
+        alert("Select an option first!");
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mundu Rater</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #fff8e1, #ffe082);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .quiz-container {
+      background: #ffffff;
+      border: 5px solid #e65100;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      width: 650px;
+      max-width: 95%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    h1 {
+      color: #e65100;
+    }
+    .step {
+      display: none;
+    }
+    .step.active {
+      display: block;
+      animation: fadeIn 0.8s ease;
+    }
+    .option-btn {
+      background: #ffd600;
+      border: 2px solid #e65100;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      font-size: 16px;
+    }
+    .option-btn:hover {
+      background: #ffca28;
+      transform: scale(1.05);
+    }
+    .tooltip {
+      visibility: hidden;
+      background: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 8px;
+      border-radius: 8px;
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 14px;
+      width: max-content;
+      max-width: 280px;
+      z-index: 1;
+    }
+    .option-btn:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+    #result {
+      font-size: 20px;
+      font-weight: bold;
+      color: #004d40;
+      padding: 20px;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>👑 Mundu Rater</h1>
+
+    <div id="steps">
+      <!-- Step 1 -->
+      <div class="step active" id="step1">
+        <h2>Choose Mundu Type</h2>
+        <button class="option-btn" onclick="nextStep(1,'normal')">
+          Normal Mundu
+          <div class="tooltip">nee shooperaada , nokkem kandum kalicha aura pokathilla<br>(risk of loosing high)</div>
+        </button>
+        <button class="option-btn" onclick="nextStep(1,'velcro')">
+          Velcro Waist Mundu
+          <div class="tooltip">kaalathinte oru pokkeyyy , vadam valikk bestaaa<br>(risk of loosing medium)</div>
+        </button>
+        <button class="option-btn" onclick="nextStep(1,'elastic')">
+          Elastic Waist Mundu
+          <div class="tooltip">ente asura padayum aayitt njan angott vannalondallo<br>(no risk of loosing)</div>
+        </button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step" id="step2">
+        <h2>Single or Double Mundu?</h2>
+        <button class="option-btn" onclick="nextStep(2,'double')">
+          Double Mundu
+          <div class="tooltip">nee kollalo unni</div>
+        </button>
+        <button class="option-btn" onclick="nextStep(2,'single')">
+          Single Mundu
+          <div class="tooltip">sun is your greatest enemy , adiyil nikkar idane puthra</div>
+        </button>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step" id="step3">
+        <h2>With or Without Belt?</h2>
+        <button class="option-btn" onclick="showResult('nobelt')">
+          Without Belt
+          <div class="tooltip" id="beltTooltip"></div>
+        </button>
+        <button class="option-btn" onclick="showResult('belt')">
+          With Belt
+          <div class="tooltip" id="beltTooltip2"></div>
+        </button>
+      </div>
+    </div>
+
+    <div id="result"></div>
+  </div>
+
+  <script>
+    let score = 0;
+    let munduType = "";
+    let munduStyle = "";
+
+    function nextStep(stepNumber, choice) {
+      if (stepNumber === 1) {
+        munduType = choice;
+        if (choice === "normal") { score += 1; score -= 1; }
+        if (choice === "velcro") { score += 1; }
+        if (choice === "elastic") { score -= 1; score += 1; }
+      }
+      if (stepNumber === 2) {
+        munduStyle = choice;
+        if (choice === "double") score += 1;
+        if (choice === "single") score -= 1;
+      }
+
+      document.getElementById("step" + stepNumber).classList.remove("active");
+      document.getElementById("step" + (stepNumber + 1)).classList.add("active");
+
+      // Update tooltips in belt step based on type
+      if (stepNumber === 2) {
+        const tt1 = document.getElementById("beltTooltip");
+        const tt2 = document.getElementById("beltTooltip2");
+
+        if (munduType === "normal") {
+          tt1.innerText = "inaganathe dhairyam charls shobharaajil polum njan kandittilla";
+          tt2.innerText = "you must be batman- always have a backup";
+        }
+        if (munduType === "velcro") {
+          tt1.innerText = "ini athinte korravoode ollu ayyelodaa...";
+          tt2.innerText = "endhinu , ingane pedikkalledo?????";
+        }
+        if (munduType === "elastic") {
+          tt1.innerText = "ini athinte korravoode ollu ayyelodaa..";
+          tt2.innerText = "ithinokke njan enna parayaana puthraa???";
+        }
+      }
+    }
+
+    function showResult(beltChoice) {
+      if (munduType === "normal") {
+        if (beltChoice === "nobelt") score += 1;
+        if (beltChoice === "belt") score += 1;
+      }
+      if (munduType === "velcro") {
+        if (beltChoice === "nobelt") score += 1;
+        if (beltChoice === "belt") score -= 1;
+      }
+      if (munduType === "elastic") {
+        if (beltChoice === "nobelt") score += 1;
+        if (beltChoice === "belt") score -= 2;
+      }
+
+      document.getElementById("step3").classList.remove("active");
+
+      let message = "";
+      if (score > 0) {
+        message = "✅ Namukk ninne Isttapettirikkunnu Puthra , nee nammudekoode paathaalathilekk pore 🎉";
+      } else {
+        message = "⚠️ verum show alle nee ? , mund udukkan ariyathillengi poyi pant ittond vaado puthraaa 😭";
+      }
+
+      document.getElementById("result").innerHTML = message;
+    }
+  </script>
+</body>
+</html>
