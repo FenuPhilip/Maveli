@@ -13,6 +13,26 @@
       justify-content: center;
       align-items: center;
     }
+
+    /* 🔹 Loading Screen */
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("assets/Oodi.png") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: white;
+      font-size: 36px;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    /* Quiz Container */
     .quiz-container {
       background: #ffffff;
       border: 5px solid #e65100;
@@ -22,6 +42,7 @@
       width: 650px;
       max-width: 95%;
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      display: none; /* hidden until loading ends */
     }
     h1 {
       color: #e65100;
@@ -83,7 +104,15 @@
   </style>
 </head>
 <body>
-  <div class="quiz-container">
+  <!-- 🔹 Loading Page -->
+  <div id="loading">
+    Loading... ⏳
+    <audio id="loading-audio" src="assets/oohoi.mp3" autoplay muted></audio>
+  </div>
+  
+
+  <!-- 🔹 Quiz Page -->
+  <div class="quiz-container" id="quiz">
     <h1>👑 Mundu Rater</h1>
 
     <div id="steps">
@@ -135,6 +164,32 @@
   </div>
 
   <script>
+    // 🔹 Try autoplay (muted -> unmute)
+    window.addEventListener("DOMContentLoaded", () => {
+      const audio = document.getElementById("loading-audio");
+      setTimeout(() => {
+        audio.muted = false;
+        audio.play().catch(() => {
+          console.log("Autoplay blocked. Waiting for user interaction...");
+        });
+      }, 200);
+    });
+
+    // 🔹 User click fallback
+    document.addEventListener("click", () => {
+      const audio = document.getElementById("loading-audio");
+      if (audio.paused) {
+        audio.muted = false;
+        audio.play().catch(err => console.log(err));
+      }
+    }, { once: true });
+
+    // 🔹 Hide loading after 5s
+    setTimeout(() => {
+      document.getElementById("loading").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+    }, 5000);
+
     let score = 0;
     let munduType = "";
     let munduStyle = "";
@@ -155,7 +210,6 @@
       document.getElementById("step" + stepNumber).classList.remove("active");
       document.getElementById("step" + (stepNumber + 1)).classList.add("active");
 
-      // Update tooltips in belt step based on type
       if (stepNumber === 2) {
         const tt1 = document.getElementById("beltTooltip");
         const tt2 = document.getElementById("beltTooltip2");

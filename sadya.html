@@ -32,6 +32,24 @@
       background-size: 50px 50px;
     }
 
+    /* 🔹 Loading Screen */
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("assets/Oodi.png") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: white;
+      font-size: 36px;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
     header {
       background: var(--primary);
       padding: 15px 20px;
@@ -275,6 +293,12 @@
   </style>
 </head>
 <body>
+  <!-- 🔹 Loading Page -->
+  <div id="loading">
+    Loading... ⏳
+    <audio id="loading-audio" src="assets/oohoi.mp3" autoplay muted playsinline></audio>
+  </div>
+
   <header>
     <div class="container">🍌 Sadhya Rater 🍌</div>
   </header>
@@ -531,6 +555,43 @@
 
     // Initialize progress bar
     updateProgressBar();
+  </script>
+
+  <!-- 🔹 Loading overlay logic (audio + hide after 5s). Keeps your main script untouched. -->
+  <script>
+    (function() {
+      const overlay = document.getElementById('loading');
+      const audio = document.getElementById('loading-audio');
+
+      // Try autoplay: start muted, then unmute & play
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          if (audio) {
+            audio.muted = false;
+            audio.play().catch(() => {
+              // Autoplay blocked; will rely on click fallback
+            });
+          }
+        }, 200);
+      });
+
+      // Click/tap fallback for browsers blocking autoplay
+      document.addEventListener('click', function once() {
+        if (audio && audio.paused) {
+          audio.muted = false;
+          audio.play().catch(() => {});
+        }
+        document.removeEventListener('click', once);
+      }, { once: true });
+
+      // Stop audio and hide overlay after 5 seconds
+      setTimeout(() => {
+        if (audio) {
+          try { audio.pause(); audio.currentTime = 0; } catch (e) {}
+        }
+        if (overlay) overlay.style.display = 'none';
+      }, 5000);
+    })();
   </script>
 </body>
 </html>

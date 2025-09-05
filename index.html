@@ -6,6 +6,65 @@
     <title>👑 Maveli's LinkedIn</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Loading Screen Styles */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/mav1.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-content {
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: var(--lemon);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Easter Egg Styles */
+        .easter-egg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+        
+        .easter-egg:hover {
+            opacity: 0.8;
+        }
+        
+        .easter-egg img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -696,6 +755,11 @@
             .corner-image {
                 display: none;
             }
+            
+            /* Adjust loading screen for mobile */
+            .loading-content h2 {
+                font-size: 20px;
+            }
         }
         
         /* Two-column layout for better space usage */
@@ -720,6 +784,22 @@
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Loading Maveli's Kingdom...</h2>
+        </div>
+    </div>
+
+    <!-- Easter Egg -->
+    <div class="easter-egg" id="easter-egg">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZkZDQ0IiBkPSJNNDU2IDI1NmMwIDExMC41LTg5LjUgMjAwLTIwMCAyMDBTMzYgMzY2LjUgMzYgMjU2UzEyNS41IDU2IDI1NiA1NnMyMDAgODkuNSAyMDAgMjAweiIvPjxwYXRoIGZpbGw9IiM2NjY2NjYiIGQ9Ik0yNTYgOTBjLTMzLjEgMC02MCAyNi45LTYwIDYwczI2LjkgNjAgNjAgNjAgNjAtMjYuOSA2MC02MC0yNi45LTYwLTYwLTYweiIvPjxwYXRoIGZpbGw9IiM2NjY2NjYiIGQ9Ik0zNDYgMjA2YzAgMTkuOS0xNi4xIDM2LTM2IDM2cy0zNi0xNi4xLTM2LTM2YzAtMTkuOSAxNi4xLTM2IDM2LTM2czM2IDE2LjEgMzYgMzZ6bS0xODAgMGMwIDE5LjktMTYuMSAzNi0zNiAzNnMtMzYtMTYuMS0zNi0zNmMwLTE5LjkgMTYuMS0zNiAzNi0zNnMzNiAxNi4xIDM2IDM2eiIvPjxwYXRoIGZpbGw9IiM2NjY2NjYiIGQ9Ik0yNTYgNDE2Yy00NC4yIDAtODAtMzUuOC04MC04MHMzNS44LTgwIDgwLTgwIDgwIDM1LjggODAgODAtMzUuOCA4MC04MCA4MHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjU2IDI4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJzMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyLTE0LjMgMzItMzIgMzJ6Ii8+PC9zdmc+" alt="Easter Egg">
+    </div>
+    
+    <!-- Audio Element for Easter Egg -->
+    <audio id="easter-audio" src="assets/mavelivanne.mp3"></audio>
+
     <!-- Decorative corner images -->
     <div class="corner-image top-left"></div>
     <div class="corner-image bottom-right"></div>
@@ -906,7 +986,7 @@
                             <div class="post-img" style="background-image: url('assets/banana.png');">Banana Chip Crisis</div>
                             <div class="post-content">
 <p class="post-text">
-Breaking news: Banana chips now come in two sizes—“microscope slide” and “manhole cover.”  
+Breaking news: Banana chips now come in two sizes—“microscope slide” and "manhole cover."  
 Somewhere, a snack god is laughing. #ChipGate2025
 </p>
                                 <div class="post-reactions">
@@ -1098,6 +1178,34 @@ Somewhere, a snack god is laughing. #ChipGate2025
     </footer>
 
     <script>
+        // Loading screen functionality
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 3000); // 3 seconds
+        });
+        
+        // Easter egg functionality
+        let isPlaying = false;
+        const easterEgg = document.getElementById('easter-egg');
+        const audio = document.getElementById('easter-audio');
+        
+        easterEgg.addEventListener('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                audio.currentTime = 0;
+                easterEgg.style.opacity = '0.3';
+            } else {
+                audio.play();
+                easterEgg.style.opacity = '0.8';
+            }
+            isPlaying = !isPlaying;
+        });
+        
         // Function for Connect button
         function connect() {
             alert("Maveli has been notified of your connection request! He'll resposnd soon as possible after BSNL has a branch in pathalam!");
