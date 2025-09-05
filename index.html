@@ -42,27 +42,72 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Easter Egg Styles */
+        /* Easter Egg Styles - IMPROVED */
         .easter-egg {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 30px;
-            height: 30px;
+            width: 60px;
+            height: 80px;
             cursor: pointer;
             z-index: 1000;
-            opacity: 0.3;
-            transition: opacity 0.3s;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
+            animation: wiggle 5s infinite;
         }
         
+        @keyframes wiggle {
+    0% { transform: scale(1.1) rotate(-3deg);}
+    25% { transform: scale(1.12) rotate(3deg);}
+    50% { transform: scale(1.1) rotate(-3deg);}
+    75% { transform: scale(1.12) rotate(3deg);}
+    100% { transform: scale(1.1) rotate(-3deg);}
+}
         .easter-egg:hover {
-            opacity: 0.8;
+            opacity: 1;
+            transform: scale(1.1);
         }
         
         .easter-egg img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+        
+        .easter-egg::after {
+            content: "🎵";
+            position: absolute;
+            top: -25px;
+            right: 0;
+            font-size: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Easter Egg Tooltip */
+        .easter-egg-tooltip {
+            position: absolute;
+            bottom: 90px;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            width: 150px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .easter-egg:hover .easter-egg-tooltip {
+            opacity: 1;
         }
 
         * {
@@ -760,6 +805,20 @@
             .loading-content h2 {
                 font-size: 20px;
             }
+            
+            /* Adjust easter egg for mobile */
+            .easter-egg {
+                width: 50px;
+                height: 70px;
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .easter-egg-tooltip {
+                bottom: 75px;
+                width: 120px;
+                font-size: 10px;
+            }
         }
         
         /* Two-column layout for better space usage */
@@ -792,9 +851,10 @@
         </div>
     </div>
 
-    <!-- Easter Egg -->
+    <!-- Easter Egg - IMPROVED -->
     <div class="easter-egg" id="easter-egg">
         <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjZmZkZDQ0IiBkPSJNNDU2IDI1NmMwIDExMC41LTg5LjUgMjAwLTIwMCAyMDBTMzYgMzY2LjUgMzYgMjU2UzEyNS41IDU2IDI1NiA1NnMyMDAgODkuNSAyMDAgMjAweiIvPjxwYXRoIGZpbGw9IiM2NjY2NjYiIGQ9Ik0yNTYgOTBjLTMzLjEgMC02MCAyNi45LTYwIDYwczI2LjkgNjAgNjAgNjAgNjAtMjYuOSA2MC02MC0yNi45LTYwLTYwLTYweiIvPjxwYXRoIGZpbGw9IiM2NjY2NjYiIGQ9Ik0zNDYgMjA2YzAgMTkuOS0xNi4xIDM2LTM2IDM2cy0zNi0xNi4xLTM2LTM2YzAtMTkuOSAxNi4xLTM2IDM2LTM2czM2IDE2LjEgMzYgMzZ6bS0xODAgMGMwIDE5LjktMTYuMSAzNi0zNiAzNnMtMzYtMTYuMS0zNi0zNmMwLTE5LjkgMTYuMS0zNiAzNi0zNnMzNiAxNi4xIDM2IDM2eiIvPjxwYXRoIGZpbGw9IiM2NjY2NjYiIGQ9Ik0yNTYgNDE2Yy00NC4yIDAtODAtMzUuOC04MC04MHMzNS44LTgwIDgwLTgwIDgwIDM1LjggODAgODAtMzUuOCA4MC04MCA4MHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMjU2IDI4OGMtMTcuNyAwLTMyLTE0LjMtMzItMzJzMTQuMy0zMiAzMi0zMiAzMiAxNC4zIDMyIDMyLTE0LjMgMzItMzIgMzJ6Ii8+PC9zdmc+" alt="Easter Egg">
+        <div class="easter-egg-tooltip">Click cheiyy makane!</div>
     </div>
     
     <!-- Audio Element for Easter Egg -->
@@ -950,7 +1010,7 @@
         - Coordinated the world's largest catering service without Swiggy, Zomato, or even WhatsApp groups<br>
         - Supervised 64+ dishes on a single banana leaf (still waiting for Michelin to call)<br>
         - Standardized banana leaf orientation at scale – ISO certified left-to-right placement<br>
-        - Maintained pappadam crispiness under extreme humidity (recognized as Nobel-worthy achievement)<br>
+        - Maintained pappadam crispiness under extreme humidity (recognized as Nobel-worthy achievement<br>
         - Crisis management: handled curry shortages and sambhar vs rasam debates with zero casualties<br>
         - Only employee in history paid annually with floral carpets and boat races
     </div>
@@ -1198,10 +1258,12 @@ Somewhere, a snack god is laughing. #ChipGate2025
             if (isPlaying) {
                 audio.pause();
                 audio.currentTime = 0;
-                easterEgg.style.opacity = '0.3';
+                easterEgg.style.opacity = '0.7';
+                easterEgg.querySelector('.easter-egg-tooltip').textContent = "Click to play Maveli's song!";
             } else {
                 audio.play();
-                easterEgg.style.opacity = '0.8';
+                easterEgg.style.opacity = '1';
+                easterEgg.querySelector('.easter-egg-tooltip').textContent = "Dance Cheiyy Makane!";
             }
             isPlaying = !isPlaying;
         });
